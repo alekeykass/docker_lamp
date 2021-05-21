@@ -5,20 +5,23 @@
 
 для запуска парсера 
 ```http://localhost:8082/get_projects.php?import_projects=true```
-файлы сервера тут 
-```/app/
-                  /app/api/
+### файлы сервера тут 
 ```
-для сам клиент тут 
+/app/
+```
+```
+/app/api/
+```
+### для сам клиент тут 
 ```
 http://localhost/
 ```
-файлы клиента тут 
+### файлы клиента тут 
 ```
 /app/testproject/src/
 ```
 
-###для запуска 
+### для запуска 
 ```
 docker-compose build 
 docker-compose up
