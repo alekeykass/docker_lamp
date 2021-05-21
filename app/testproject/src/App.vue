@@ -13,7 +13,7 @@
         </b-col> 
         <b-col cols="4">
           <h4>Filter</h4> 
-          <Chart v-bind:pie_skills="pie_skills"   />
+          <ChartE v-bind:pie_skills="pie_skills" @changePie="changePie" />
           <FilterListBudget  @changeBudget="changeBudget" />
           <hr/>
           <FilterList v-bind:skills="skills" @changeSkills="changeSkills" />
@@ -29,7 +29,7 @@ import TodoList from '@/components/TodoList'
 import FilterList from '@/components/FilterList'
 import FilterListBudget from '@/components/FilterListBudget'
 import TodoPaginator from '@/components/TodoPaginator'
-import Chart from '@/components/Chart'
+import ChartE from '@/components/ChartE'
 
 export default {
   name: 'App',
@@ -40,7 +40,8 @@ export default {
       pie_skills:[],
       skills:[],
       props_filter:{},
-      page:1
+      page:1,
+      
     }
   },
   components: {
@@ -48,7 +49,7 @@ export default {
     FilterList,
     FilterListBudget,
     TodoPaginator,
-    Chart
+    ChartE
   },
   methods:{
     changeTodo(data){
@@ -58,6 +59,9 @@ export default {
     changeSkills(data){ 
       this.props_filter['skills']=data;
       this.get_products()
+    },
+    changePie(){
+      
     },
     changeBudget(data){
       var budget = {min:0};
@@ -69,7 +73,7 @@ export default {
 
       this.props_filter['budget']=budget;
       this.get_products()
-    },
+    }, 
     get_products(){ 
 
       fetch("http://localhost:8082/get_projects.php?api=get_list&limit=10&page="+this.page,
