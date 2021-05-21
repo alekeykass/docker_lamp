@@ -1,6 +1,8 @@
 FROM php:7.4-apache
 
-RUN apt-get update
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get clean
+ 
 
 # Install tools required for build stage
 RUN apt-get install -fyqq \
@@ -26,9 +28,14 @@ RUN apt-get install -fyqq zip libzip-dev \
  && docker-php-ext-install zip \
  && apt-get remove -fyqq libzip-dev
 
-# Install xdebug
-RUN pecl install xdebug \
- && docker-php-ext-enable xdebug
+# Install xdebug && redis
+RUN pecl install redis \
+    && pecl install xdebug \
+    && docker-php-ext-enable redis xdebug
+
+RUN docker-php-ext-install mysqli \
+    &&a2enmod headers \
+    && sed -ri -e 's/^([ \t]*)(<\/VirtualHost>)/\1\tHeader set Access-Control-Allow-Origin "*"\n\1\2/g' /etc/apache2/sites-available/*.conf
 
 # Enable XDebug
 ADD xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
