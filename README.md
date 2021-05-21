@@ -1,6 +1,12 @@
 # docker_lamp
 
 
+### для запуска 
+```
+docker-compose build 
+docker-compose up
+```
+
 использовал docker
 
 для запуска парсера 
@@ -21,8 +27,3 @@ http://localhost/
 /app/testproject/src/
 ```
 
-### для запуска 
-```
-docker-compose build 
-docker-compose up
-```
